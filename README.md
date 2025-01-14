@@ -1,6 +1,6 @@
 ## ENVIRON/ENERGY 797 - Time Series Analysis for Energy and Environment Applications
 
-This is the class repository for Time Series Analysis for Energy and Environment Applications - Spring 2025 <br>
+This is Lauren Shohan's forked class repository for Time Series Analysis for Energy and Environment Applications - Spring 2025 <br>
 
 Meeting time: T-Th 11:45 to 1:00 pm <br>
 
@@ -11,4 +11,6 @@ luana.marangon.lima@duke.edu <br>
 Office hours: Tu 13:15 -14:15 (in person Gross Hall 102K or Zoom) or by appt <br>
 Zoom info: https://duke.zoom.us/my/luanalima
 
-
+Forked owner:
+Lauren Shohan
+lauren.shohan@duke.edu
