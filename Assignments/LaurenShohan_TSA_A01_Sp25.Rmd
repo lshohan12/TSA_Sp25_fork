@@ -29,6 +29,7 @@ Q2. (Only if you choose to use git) Provide a link below to your forked course r
 > Answer: https://github.com/lshohan12/TSA_Sp25_fork
 While doing this the 'getting started with GitHub' link is locked so not sure
 what would need to be changed on the ReadMe! All the information looks correct.
+I just added my name and email!
 
 
 Q3. For this part we just want to see the path to your R project. No need to do anything. The output will be automatically generated once you knit you file. 
