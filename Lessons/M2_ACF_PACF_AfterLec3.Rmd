@@ -88,13 +88,15 @@ A plot of observed values over time is the first thing you do to start understan
 
 ```{r}
 #using package ggplot2
-ggplot(inflow_data, aes(x=my_date, y = HP2)) + 
+ggplot(inflow_data, aes(x=my_date,y=HP2))+
   geom_line()
 
 #adding two time series to the same plot
-
-#ggplot(inflow_data, aes(x=my_date))  #not finished
-  
+ggplot(inflow_data, aes(x=my_date))+
+  geom_line(aes(y=HP1,col="HP1"))+
+  geom_line(aes(y=HP3,col="HP2"))+
+  xlab("Time")+
+  labs(color="Reservoir")
 
 ```
 
@@ -106,9 +108,7 @@ In this course we will also use *autoplot()* which is a ggplot() for time series
 Many of the functions we will use require a time series object. You can transform your data in a time series using the function *ts()*. Only the columns with reservoir inflow data should be transformed, not the ones with month and year. Your ts object is not a data frame, but like I said we will need it as a ts for some function we will explore in future scripts.
 
 ```{r}
-ts_inflow_data <- ts(inflow_data$HP1, start = c(1931, 1), frequency = 12)
-  #frequency of 12 because of months
-ts_inflow_data4 <- ts(inflow_data[,2:4], start = c(1931, 1), frequency = 12)
+ts_inflow_data <- ts(inflow_data[,2:4],start=c(1931,1),frequency=12)
 ts_inflow_data
 
 ```
@@ -118,9 +118,8 @@ Note that ts_inflow_data has information on start, end and frequency. We will di
 Let's see the plots generated with *autoplot()*.
 
 ```{r}
-#autoplot is ggplot for time series data
 
-autoplot(ts_inflow_data4) +
+autoplot(ts_inflow_data) +
   xlab("Time") +
   ylab("Inflow") +
   labs(color="Reservoir")
@@ -134,33 +133,18 @@ There are multiple ways to get acf and pacf plots in R. The default package "sta
 
 ```{r acf}
 # Option 1: The function acf() and pacf() is from package "stats"
-#lags are months - with capitalized acf and pacf it looks better!!!
+HP1_acf=acf(ts_inflow_data[,1],lag=60)
 
-HP1_acf=acf(ts_inflow_data4[,1], lag = 60) 
-  #lag 0 is from month 1 to month 1,
-  # 2 bar shows that correlation at lag 1 is between 0.8 so strong correlation of what happened in month before onto the next month
-  #correlation slowly goes down over time, relationship decreases so months arent as correlated over 3-4 month span
-  #strong seasonal component reflected in ACF 
-HP1_acf=Acf(ts_inflow_data4[,1], lag = 60) 
+HP1_pacf=pacf(ts_inflow_data[,1],lag=60)
 
 #Option 2: Computing ACF and PACF with package "forecast"
-HP1_pacf=pacf(ts_inflow_data4[,1], lag = 60)
-
-HP1_pacf=Pacf(ts_inflow_data4[,1], lag = 60)
-
 
 #The next line will output a plot since we have plot=TRUE and also store the acf values in the object
-HP1_acf=
+HP1_acf=Acf(ts_inflow_data[,1],lag=60)
 
-HP1_pacf=
+HP1_pacf=Pacf(ts_inflow_data[,1],lag=60)
 
-temp <- c(14.2,16.4,11.9,15.2,18.5,22.1,19.4,25.1,23.4,18.1,22.6,17.2)
-temp_ts <- ts(temp) #need to convert into time series before we generate ACF
-library(forecast)
-temp_acf <- Acf(temp_ts)
-
-temp_acf
-#different from excel correl function bc correl doesnt change mus so need more detailed excel calculations
-
+#blue lines - anything outside of lines is significantly different from 0, anything that lies within in not 
+  
 ```
 

@@ -32,12 +32,17 @@ library(openxlsx)
 ```{r}
 #Importing data set without change the original file using read.xlsx
 energy_data1 <- read_excel(path="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",skip = 12, sheet="Monthly Data",col_names=FALSE) 
+    #skipping first 12 rows and starting with first observation 
+    #no colnames bc we skipped that row
 
 #Now let's extract the column names from row 11
 read_col_names <- read_excel(path="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",skip = 10,n_max = 1, sheet="Monthly Data",col_names=FALSE) 
+      #just reading row with colnames 
+      #so starts reading at row 11 with just the headers
+      #n_max = 1 -> tells read excel you are only interested in row 11 and dont read anymore rows
 
 #Assign the column names to the data set
-colnames(energy_data1) <- read_col_names
+colnames(energy_data1) <- read_col_names #assigning chr list of names to energydata 
 
 #Visualize the first rows of the data set
 head(energy_data1)
@@ -47,6 +52,8 @@ head(energy_data1)
 ## Importing data with read.xlsx()
 
 ```{r}
+#another way to import - sometimes functions dont always work!!! but heres another way
+
 energy_data2 <- read.xlsx(xlsxFile="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",sheet = "Monthly Data", startRow = 13, colNames = FALSE)
 
 read_col_names2  <- read.xlsx(xlsxFile="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",sheet = "Monthly Data", rows = 11, colNames = FALSE)
